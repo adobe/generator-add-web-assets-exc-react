@@ -1,5 +1,5 @@
 /* <% if (false) { %>
-Copyright 2019 Adobe. All rights reserved.
+Copyright 2022 Adobe. All rights reserved.
 This file is licensed to you under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License. You may obtain a copy
 of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -33,11 +33,11 @@ import actionWebInvoke from '../utils'
 
 // remove the deprecated key
 const actions = Object.keys(allActions).reduce((obj, key) => {
-  if (key.lastIndexOf("/") > -1) {
-    obj[key] = allActions[key];
+  if (key.lastIndexOf('/') > -1) {
+    obj[key] = allActions[key]
   }
-  return obj;
-}, {});
+  return obj
+}, {})
 
 const ActionsForm = (props) => {
   const [state, setState] = useState({
@@ -112,26 +112,26 @@ const ActionsForm = (props) => {
       )}
 
       {state.actionResponseError && (
-        <View padding={`size-100`} marginTop={`size-100`} marginBottom={`size-100`} borderRadius={`small `}>
+        <View padding={'size-100'} marginTop={'size-100'} marginBottom={'size-100'} borderRadius={'small '}>
           <StatusLight variant="negative">Failure! See the complete error in your browser console.</StatusLight>
         </View>
       )}
       {!state.actionResponseError && state.actionResponse && (
-        <View padding={`size-100`} marginTop={`size-100`} marginBottom={`size-100`} borderRadius={`small `}>
+        <View padding={'size-100'} marginTop={'size-100'} marginBottom={'size-100'} borderRadius={'small '}>
           <StatusLight variant="positive">Success! See the complete response in your browser console.</StatusLight>
         </View>
       )}
 
       {Object.keys(actions).length === 0 && <Text>You have no actions !</Text>}
-        <TextArea
-            label="results"
-            isReadOnly={true}
-            width="size-6000"
-            height="size-6000"
-            maxWidth="100%"
-            value={state.actionResult}
-            validationState={( !state.actionResponseError ) ? 'valid' : 'invalid'}
-          />
+      <TextArea
+        label="results"
+        isReadOnly={true}
+        width="size-6000"
+        height="size-6000"
+        maxWidth="100%"
+        value={state.actionResult}
+        validationState={(!state.actionResponseError) ? 'valid' : 'invalid'}
+      />
     </View>
   )
 
@@ -176,16 +176,16 @@ const ActionsForm = (props) => {
     if (props.ims.org && !headers['x-gw-ims-org-id']) {
       headers['x-gw-ims-org-id'] = props.ims.org
     }
-    let formattedResult = ""
+    let formattedResult = ''
     try {
       // invoke backend action
       const actionResponse = await actionWebInvoke(actions[actionName], headers, params)
-      formattedResult = `time: ${Date.now() - startTime} ms\n` + JSON.stringify(actionResponse,0,2)
+      formattedResult = `time: ${Date.now() - startTime} ms\n` + JSON.stringify(actionResponse, 0, 2)
       // store the response
       setState({
         ...state,
         actionResponse,
-        actionResult:formattedResult,
+        actionResult: formattedResult,
         actionResponseError: null,
         actionInvokeInProgress: false
       })
@@ -197,7 +197,7 @@ const ActionsForm = (props) => {
       setState({
         ...state,
         actionResponse: null,
-        actionResult:formattedResult,
+        actionResult: formattedResult,
         actionResponseError: e.message,
         actionInvokeInProgress: false
       })

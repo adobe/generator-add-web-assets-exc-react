@@ -9,91 +9,65 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const Generator = require('yeoman-generator')
 const path = require('path')
-const upath = require('upath')
+const Generator = require('yeoman-generator')
 
-const { constants, utils } = require('@adobe/generator-app-common-lib')
-const { runtimeManifestKey } = constants
+const { utils } = require('@adobe/generator-app-common-lib')
 
-/*
-      'initializing',
-      'prompting',
-      'configuring',
-      'default',
-      'writing',
-      'conflicts',
-      'install',
-      'end'
-      */
+class ExcReactGenerator extends Generator {
+  constructor (args, opts) {
+    super(args, opts)
+    // required
+    this.option('web-src-folder', { type: String })
+    // this.option('skip-prompt', { default: false }) // useless for now
+    this.option('config-path', { type: String })
 
-class DxExcshell1 extends Generator {
-  constructor (args, opts, features) {
-    super(args, opts, features)
-
-    // options are inputs from CLI or yeoman parent generator
-    this.option('skip-prompt', { default: false })
+    // props are used by templates
+    this.props = {}
+    this.props.projectName = utils.readPackageJson(this).name
   }
 
-  async initializing () {
-    // all paths are relative to root
-    this.extFolder = 'src/dx-excshell-1'
-    this.actionFolder = path.join(this.extFolder, 'actions')
-    // todo support multi UI (could be one for each operation)
-    this.webSrcFolder = path.join(this.extFolder, 'web-src')
-    this.extConfigPath = path.join(this.extFolder, 'ext.config.yaml')
-    this.configName = 'dx/excshell/1'
+  // nothing for now
+  // async prompting () {}
 
-    // generate the generic action
-    this.composeWith(path.join(__dirname, './templates/add-action/generic'), {
-      // forward needed args
-      'skip-prompt': true, // do not ask for action name
-      'action-folder': this.actionFolder,
-      'config-path': this.extConfigPath,
-      'full-key-to-manifest': runtimeManifestKey
+  writing () {
+    const destFolder = this.options['web-src-folder']
+    this.sourceRoot(path.join(__dirname, './templates/'))
+
+    this.fs.copyTpl(
+      this.templatePath('./**/*'),
+      this.destinationPath(destFolder),
+      this.props
+    )
+    // add .babelrc
+    /// NOTE this is a global file and might conflict
+    this.fs.writeJSON(this.destinationPath('.babelrc'), {
+      presets: [['@babel/preset-env', { targets: { node: 'current' } }]],
+      plugins: ['@babel/plugin-transform-react-jsx']
     })
-
-    // generate the UI
-    this.composeWith(path.join(__dirname, './templates/add-web-assets/exc-react'), {
-      // forward needed args
-      'skip-prompt': this.options['skip-prompt'],
-      'web-src-folder': this.webSrcFolder,
-      'config-path': this.extConfigPath
+    // add dependencies
+    utils.addDependencies(this, {
+      'core-js': '^3.6.4',
+      react: '^16.13.1',
+      'react-dom': '^16.13.1',
+      'react-router-dom': '^5.2.0',
+      'react-error-boundary': '^1.2.5',
+      'regenerator-runtime': '^0.13.5',
+      '@adobe/exc-app': '^0.2.21',
+      '@adobe/react-spectrum': '^3.4.0',
+      '@spectrum-icons/workflow': '^3.2.0'
     })
-  }
-
-  async writing () {
-    const unixExtConfigPath = upath.toUnix(this.extConfigPath)
-    // add the extension point config in root
-    utils.writeKeyAppConfig(
+    utils.addDependencies(
       this,
-      // key
-      'extensions.' + this.configName,
-      // value
       {
-        // posix separator
-
-        $include: unixExtConfigPath
-      }
+        '@babel/core': '^7.8.7',
+        '@babel/polyfill': '^7.8.7',
+        '@babel/preset-env': '^7.8.7',
+        '@babel/plugin-transform-react-jsx': '^7.8.3'
+      },
+      true
     )
-
-    // add extension point operation
-    utils.writeKeyYAMLConfig(
-      this,
-      this.extConfigPath,
-      // key
-      'operations', {
-        view: [
-          { type: 'web', impl: 'index.html' }
-        ]
-      }
-    )
-
-    // add actions path, relative to config file
-    utils.writeKeyYAMLConfig(this, this.extConfigPath, 'actions', path.relative(this.extFolder, this.actionFolder))
-    // add web-src path, relative to config file
-    utils.writeKeyYAMLConfig(this, this.extConfigPath, 'web', path.relative(this.extFolder, this.webSrcFolder))
   }
 }
 
-module.exports = DxExcshell1
+module.exports = ExcReactGenerator

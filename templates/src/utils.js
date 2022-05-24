@@ -1,5 +1,5 @@
-/*<% if (false) { %>
-Copyright 2019 Adobe. All rights reserved.
+/* <% if (false) { %>
+Copyright 2022 Adobe. All rights reserved.
 This file is licensed to you under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License. You may obtain a copy
 of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -25,7 +25,7 @@ governing permissions and limitations under the License.
  *
  */
 
-async function actionWebInvoke (actionUrl, headers = {}, params = {}, options = { method: 'POST' }) {  
+async function actionWebInvoke (actionUrl, headers = {}, params = {}, options = { method: 'POST' }) {
   const actionHeaders = {
     'Content-Type': 'application/json',
     ...headers
@@ -47,11 +47,11 @@ async function actionWebInvoke (actionUrl, headers = {}, params = {}, options = 
   } else if (fetchConfig.method === 'POST') {
     fetchConfig.body = JSON.stringify(params)
   }
-  
+
   const response = await fetch(actionUrl, fetchConfig)
 
   let content = await response.text()
-  
+
   if (!response.ok) {
     throw new Error(`failed request to '${actionUrl}' with status: ${response.status} and message: ${content}`)
   }
