@@ -42,7 +42,6 @@ class ExcReactGenerator extends Generator {
     // add .babelrc
     /// NOTE this is a global file and might conflict
     this.fs.writeJSON(this.destinationPath('.babelrc'), {
-      presets: [['@babel/preset-env', { targets: { node: 'current' } }]],
       plugins: ['@babel/plugin-transform-react-jsx']
     })
     // add dependencies
