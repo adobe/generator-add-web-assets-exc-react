@@ -10,7 +10,7 @@
     "ecosystem:aio-app-builder-template"
   ],
   "scripts": {
-    "validation": "npx tv run-checks .",
+    "validation": "tv run-checks .",
     "test": "npm run lint && npm run unit-tests && npm run validation",
     "lint": "eslint .",
     "unit-tests": "jest -c ./jest.config.js"
