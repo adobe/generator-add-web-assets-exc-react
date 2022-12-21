@@ -4,7 +4,7 @@
   "description": "Extensibility template for generating Experience Cloud Shell web assets (React)",
   "main": "index.js",
   "engines": {
-    "node": "^14 || ^16"
+    "node": "^14.18 || ^16.13 || >=18"
   },
   "keywords": [
     "ecosystem:aio-app-builder-template"
