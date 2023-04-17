@@ -23,7 +23,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@adobe/aio-lib-template-validation": "^4.0.0",
-    "@types/jest": "^27.4.1",
+    "@types/jest": "^29.5.0",
     "eol": "^0.9.1",
     "eslint": "^8.38.0",
     "eslint-config-standard": "^14.1.0",
