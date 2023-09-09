@@ -12,7 +12,8 @@ governing permissions and limitations under the License.
 const path = require('path')
 const Generator = require('yeoman-generator')
 
-const { utils } = require('@adobe/generator-app-common-lib')
+const { utils, constants } = require('@adobe/generator-app-common-lib')
+const { commonDependencyVersions } = constants
 
 class ExcReactGenerator extends Generator {
   constructor (args, opts) {
@@ -52,20 +53,17 @@ class ExcReactGenerator extends Generator {
       'react-router-dom': '^5.2.0',
       'react-error-boundary': '^1.2.5',
       'regenerator-runtime': '^0.13.5',
+      '@adobe/aio-exc-app': commonDependencyVersions['@adobe/aio-exc-app'],
       '@adobe/exc-app': '^0.2.21',
       '@adobe/react-spectrum': '^3.4.0',
       '@spectrum-icons/workflow': '^3.2.0'
     })
-    utils.addDependencies(
-      this,
-      {
-        '@babel/core': '^7.8.7',
-        '@babel/polyfill': '^7.8.7',
-        '@babel/preset-env': '^7.8.7',
-        '@babel/plugin-transform-react-jsx': '^7.8.3'
-      },
-      true
-    )
+    utils.addDependencies(this, {
+      '@babel/core': '^7.8.7',
+      '@babel/polyfill': '^7.8.7',
+      '@babel/preset-env': '^7.8.7',
+      '@babel/plugin-transform-react-jsx': '^7.8.3'
+    }, true)
   }
 }
 

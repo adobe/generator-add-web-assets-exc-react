@@ -35,7 +35,6 @@ function assertFiles () {
   assert.file('web-src/src/exc-runtime.js')
   assert.file('web-src/src/index.css')
   assert.file('web-src/src/index.js')
-  assert.file('web-src/src/utils.js')
   assert.file('web-src/src/components/About.js')
   assert.file('web-src/src/components/ActionsForm.js')
   assert.file('web-src/src/components/App.js')
@@ -88,6 +87,7 @@ describe('run', () => {
         'react-error-boundary': expect.any(String),
         'core-js': expect.any(String),
         'regenerator-runtime': expect.any(String),
+        '@adobe/aio-exc-app': expect.any(String),
         '@adobe/exc-app': expect.any(String),
         '@adobe/react-spectrum': expect.any(String),
         '@spectrum-icons/workflow': expect.any(String),
@@ -134,6 +134,7 @@ describe('run', () => {
         'react-error-boundary': expect.any(String),
         'core-js': expect.any(String),
         'regenerator-runtime': expect.any(String),
+        '@adobe/aio-exc-app': expect.any(String),
         '@adobe/exc-app': expect.any(String),
         '@adobe/react-spectrum': expect.any(String),
         '@spectrum-icons/workflow': expect.any(String),
