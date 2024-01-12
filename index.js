@@ -52,7 +52,7 @@ class ExcReactGenerator extends Generator {
       'react-router-dom': '^5.2.0',
       'react-error-boundary': '^1.2.5',
       'regenerator-runtime': '^0.13.5',
-      '@adobe/exc-app': '^0.2.21',
+      '@adobe/exc-app': '^1.3.0',
       '@adobe/react-spectrum': '^3.4.0',
       '@spectrum-icons/workflow': '^3.2.0'
     })
