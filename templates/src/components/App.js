@@ -14,7 +14,7 @@ governing permissions and limitations under the License.
 import React from 'react'
 import { Provider, defaultTheme, Grid, View } from '@adobe/react-spectrum'
 import ErrorBoundary from 'react-error-boundary'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import SideBar from './SideBar'
 import ActionsForm from './ActionsForm'
 import { Home } from './Home'
@@ -53,17 +53,11 @@ function App (props) {
               <SideBar></SideBar>
             </View>
             <View gridArea='content' padding='size-200'>
-              <Switch>
-                <Route exact path='/'>
-                  <Home></Home>
-                </Route>
-                <Route path='/actions'>
-                  <ActionsForm runtime={props.runtime} ims={props.ims} />
-                </Route>
-                <Route path='/about'>
-                  <About></About>
-                </Route>
-              </Switch>
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/actions' element={<ActionsForm runtime={props.runtime} ims={props.ims} />}/>
+                <Route path='/about' element={<About />}/>
+              </Routes>
             </View>
           </Grid>
         </Provider>

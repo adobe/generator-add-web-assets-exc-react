@@ -49,7 +49,7 @@ class ExcReactGenerator extends Generator {
       'core-js': '^3.6.4',
       react: '^16.13.1',
       'react-dom': '^16.13.1',
-      'react-router-dom': '^5.2.0',
+      'react-router-dom': '^6.26.2',
       'react-error-boundary': '^1.2.5',
       'regenerator-runtime': '^0.13.5',
       '@adobe/exc-app': '^1.3.0',
