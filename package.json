@@ -1,6 +1,6 @@
 {
   "name": "@adobe/generator-add-web-assets-exc-react",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Extensibility template for generating Experience Cloud Shell web assets (React)",
   "main": "index.js",
   "engines": {
