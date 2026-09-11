@@ -9,10 +9,13 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const path = require('path')
-const Generator = require('yeoman-generator')
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import Generator from 'yeoman-generator'
 
-const { utils } = require('@adobe/generator-app-common-lib')
+import { utils } from '@adobe/generator-app-common-lib'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 class ExcReactGenerator extends Generator {
   constructor (args, opts) {
@@ -69,4 +72,4 @@ class ExcReactGenerator extends Generator {
   }
 }
 
-module.exports = ExcReactGenerator
+export default ExcReactGenerator

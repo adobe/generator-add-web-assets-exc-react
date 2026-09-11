@@ -9,16 +9,14 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-/* eslint-disable jest/expect-expect */ // => use assert
+import helpers from 'yeoman-test'
+import assert from 'yeoman-assert'
+import fs from 'node:fs'
+import path from 'node:path'
+import cloneDeep from 'lodash.clonedeep'
 
-const helpers = require('yeoman-test')
-const assert = require('yeoman-assert')
-const fs = require('fs')
-const path = require('path')
-const cloneDeep = require('lodash.clonedeep')
-
-const excReact = require('../index')
-const Generator = require('yeoman-generator')
+import excReact from '../index.js'
+import Generator from 'yeoman-generator'
 
 describe('prototype', () => {
   test('exports a yeoman generator', () => {
