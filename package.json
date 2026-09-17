@@ -27,7 +27,7 @@
     "@adobe/eslint-config-aio-lib-config": "^4.0.0",
     "@vitest/coverage-v8": "^2.1.0",
     "eol": "^0.9.1",
-    "eslint": "^8.57.1",
+    "eslint": "^9.25.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsdoc": "^48.11.0",
